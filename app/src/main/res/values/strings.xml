@@ -3,4 +3,7 @@
     <string name="nomeCadastro">Digite seu nome</string>
     <string name="logoDescricao">Logo Whatsapp</string>
     <string name="btnCadastrar">Cadastrar</string>
+    <string name="viewValidacao">Validação</string>
+    <string name="msgValidacao">Você recebeu um SMS para validação de seu numero, digit o código de validação abaixo</string>
+    <string name="btnValidacao">Validar</string>
 </resources>
