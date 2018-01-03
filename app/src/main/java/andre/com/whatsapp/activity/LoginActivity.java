@@ -2,11 +2,15 @@ package andre.com.whatsapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
+import java.util.Random;
 
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.activity.mascaras.MascaraCadastrar;
@@ -33,7 +37,31 @@ public class LoginActivity extends AppCompatActivity {
 
         mascaraCadastrar = new MascaraCadastrar(edtCodPais,edtCodArea,edtCelular);
 
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String nomeUser = edtNome.getText().toString();
+                String telefoneCompleto =
+                        edtCodPais.getText().toString() +
+                        edtCodArea.getText().toString() +
+                        edtCelular.getText().toString();
+
+                telefoneCompleto = telefoneCompleto.replace("+", "");
+                telefoneCompleto = telefoneCompleto.replace("-","");
+
+                Random randomico = new Random();
+
+                int numeroRandomico = randomico.nextInt(9999 - 1000) + 1000;
+
+                String token = String.valueOf(numeroRandomico);
+
+
+
+
+
+            }
+        });
 
     }
 }
