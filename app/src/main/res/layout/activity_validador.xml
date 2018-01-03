@@ -38,25 +38,25 @@
         android:textSize="15sp"/>
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/edtValidar"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Dgite o código!"
+        android:hint="Digite o código!"
         android:inputType="number"
         android:textColor="@color/textColorPrimary" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnValidar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText5"
+        android:layout_below="@+id/edtValidar"
         android:layout_marginTop="25dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/btnValidacao"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:text="@string/btnValidacao" />
 </RelativeLayout>

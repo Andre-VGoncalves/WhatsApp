@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="6dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -31,44 +31,44 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edtCodPais"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/edtNome"
         android:ems="10"
         android:inputType="number"
         android:hint="55"
         android:textColor="@color/textColorPrimary"/>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/edtCodArea"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_toEndOf="@+id/editText2"
+        android:layout_alignBaseline="@+id/edtCodPais"
+        android:layout_alignBottom="@+id/edtCodPais"
+        android:layout_toEndOf="@+id/edtCodPais"
         android:ems="10"
         android:inputType="number"
         android:hint="11"
         android:textColor="@color/textColorPrimary"/>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/edtCelular"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText3"
+        android:layout_alignTop="@+id/edtCodArea"
         android:layout_marginStart="17dp"
-        android:layout_toEndOf="@+id/editText3"
+        android:layout_toEndOf="@+id/edtCodArea"
         android:ems="10"
         android:hint="953383672"
         android:textColor="@color/textColorPrimary"
         android:inputType="number" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCadastrar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/edtCelular"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
         android:background="@color/colorPrimaryDark"
