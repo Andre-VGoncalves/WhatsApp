@@ -1,5 +1,10 @@
 package andre.com.whatsapp.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -7,11 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Random;
 
 import andre.com.whatsapp.R;
+import andre.com.whatsapp.helper.Permisao;
 import andre.com.whatsapp.helper.Preferencias;
 import andre.com.whatsapp.mascaras.MascaraCadastrar;
 
@@ -23,11 +30,16 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtCodArea;
     private Button btnCadastrar;
     private MascaraCadastrar mascaraCadastrar;
+    private String[] permissoes = new String[]{
+            Manifest.permission.SEND_SMS
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Permisao.validarPermissoes(1,this, permissoes);
 
         edtCelular   = findViewById(R.id.edtCelular);
         edtNome      = findViewById(R.id.edtNome);
@@ -65,7 +77,17 @@ public class LoginActivity extends AppCompatActivity {
                 */
 
                 //Envio SMS
-                boolean enviandoSMS = enviaSMS("+" + telefoneCompleto, token);
+                boolean enviandoSMS = enviaSMS("+" + telefoneCompleto,"Bem vindo ao Dede Zap digite o Codigo para  " + token);
+
+                if(enviandoSMS){
+
+                    Intent intent = new Intent(LoginActivity.this, ValidadorActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else {
+                    Toast.makeText(LoginActivity.this,"Problema ao enviar tente novamente!!!", Toast.LENGTH_SHORT).show();
+                }
 
 
 
@@ -84,5 +106,33 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissons, int[] grantResults){
+
+        super.onRequestPermissionsResult(requestCode, permissons, grantResults);
+
+        for(int result : grantResults){
+            if (result == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermisao();
+            }
+
+        }
+
+    }
+
+    private void alertaValidacaoPermisao(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissoes negadas");
+        builder.setMessage("Para utilizar o APP é preciso aceitar as permissoes");
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
