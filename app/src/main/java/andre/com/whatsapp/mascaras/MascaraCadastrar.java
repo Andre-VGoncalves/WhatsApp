@@ -1,9 +1,6 @@
-package andre.com.whatsapp.activity.mascaras;
+package andre.com.whatsapp.mascaras;
 
 import android.widget.EditText;
-
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 public class MascaraCadastrar {
 

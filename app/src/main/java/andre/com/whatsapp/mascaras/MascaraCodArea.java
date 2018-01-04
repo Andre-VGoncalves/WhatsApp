@@ -1,4 +1,4 @@
-package andre.com.whatsapp.activity.mascaras;
+package andre.com.whatsapp.mascaras;
 
 import android.widget.EditText;
 

@@ -2,18 +2,18 @@ package andre.com.whatsapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
-
+import java.util.HashMap;
 import java.util.Random;
 
 import andre.com.whatsapp.R;
-import andre.com.whatsapp.activity.mascaras.MascaraCadastrar;
+import andre.com.whatsapp.helper.Preferencias;
+import andre.com.whatsapp.mascaras.MascaraCadastrar;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -55,13 +55,34 @@ public class LoginActivity extends AppCompatActivity {
                 int numeroRandomico = randomico.nextInt(9999 - 1000) + 1000;
 
                 String token = String.valueOf(numeroRandomico);
+                Preferencias preferencias = new Preferencias(LoginActivity.this);
+                preferencias.saveUserPreferencias(nomeUser,telefoneCompleto,token);
 
+                /*
+                HashMap<String, String> user = preferencias.getDadosUser();
 
+                Log.i("Token", user.get("token") + " Fone " + user.get("telefone") + " Nome " + user.get("nome"));
+                */
+
+                //Envio SMS
+                boolean enviandoSMS = enviaSMS("+" + telefoneCompleto, token);
 
 
 
             }
         });
+    }
 
+    private boolean enviaSMS(String telefone, String mensagem){
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(telefone,null,mensagem,null,null);
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

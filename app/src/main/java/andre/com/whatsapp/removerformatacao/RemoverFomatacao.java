@@ -1,4 +1,4 @@
-package andre.com.whatsapp.activity.removerformatacao;
+package andre.com.whatsapp.removerformatacao;
 
 /**
  * Created by andrevieira on 03/01/2018.

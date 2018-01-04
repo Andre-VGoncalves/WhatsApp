@@ -72,5 +72,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/btnCadastrar" />
+        android:text="@string/btnCadastrar"
+        android:onClick="Acao"/>
 </RelativeLayout>
