@@ -6,4 +6,6 @@
     <string name="viewValidacao">Validação</string>
     <string name="msgValidacao">Você recebeu um SMS para validação de seu numero, digit o código de validação abaixo</string>
     <string name="btnValidacao">Validar</string>
+    <string name="btnEntra">Entrar</string>
+    <string name="viewCadastrar">Não possui conta? Cadastre-se</string>
 </resources>
