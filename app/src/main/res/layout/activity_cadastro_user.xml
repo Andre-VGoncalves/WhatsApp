@@ -48,7 +48,6 @@
         android:layout_below="@+id/edtSenha"
         android:layout_marginTop="27dp"
         android:background="@color/colorPrimaryDark"
-        android:onClick="cadastroUser"
         android:text="@string/btnCadastrar" />
 
     <EditText

@@ -11,14 +11,12 @@ import andre.com.whatsapp.config.ConfigFirebase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DatabaseReference referenceFirebase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        referenceFirebase = ConfigFirebase.getFirebase();
 
 
     }

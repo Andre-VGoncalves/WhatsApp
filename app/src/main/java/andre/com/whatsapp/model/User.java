@@ -1,6 +1,11 @@
 package andre.com.whatsapp.model;
 
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
+import andre.com.whatsapp.config.ConfigFirebase;
+
 public class User {
 
     private String id;
@@ -11,6 +16,12 @@ public class User {
     public User() {
     }
 
+    public void salvar(){
+        DatabaseReference referenceFirebase = ConfigFirebase.getFirebase();
+        referenceFirebase.child("usuarios").child(getId()).setValue(this);
+    }
+
+    @Exclude
     public String getId() {
         return id;
     }
@@ -35,6 +46,7 @@ public class User {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
