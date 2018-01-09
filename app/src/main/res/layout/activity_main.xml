@@ -6,12 +6,7 @@
     android:layout_height="match_parent"
     tools:context="andre.com.whatsapp.activity.MainActivity">
 
-    <Button
-        android:id="@+id/btnSair"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="Sair" />
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
 </RelativeLayout>

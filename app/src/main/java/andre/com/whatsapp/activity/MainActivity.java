@@ -3,6 +3,7 @@ package andre.com.whatsapp.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,28 +17,19 @@ import andre.com.whatsapp.config.ConfigFirebase;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btnSair;
+
     private FirebaseAuth autenticacao;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnSair = findViewById(R.id.btnSair);
-        btnSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("DedeZap");
+        setSupportActionBar(toolbar);
 
-                autenticacao = ConfigFirebase.getFirebaseAutenticacao();
-                autenticacao.signOut();
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
 
     }
 }
