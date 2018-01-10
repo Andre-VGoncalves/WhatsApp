@@ -50,7 +50,8 @@
         android:layout_below="@+id/edtSenha"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/btnEntra" />
+        android:text="@string/btnEntra"
+        android:theme="@style/btnPadrao"/>
 
     <TextView
         android:id="@+id/textView"

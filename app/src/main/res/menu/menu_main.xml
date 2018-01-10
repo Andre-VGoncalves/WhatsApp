@@ -3,8 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".activity.MainActivity">
 
-    <item android:id="@+id/action_setting"
+    <item android:id="@+id/itemConfig"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:title="@string/app_name" />
+        android:title="@string/item_config"/>
+
+    <item android:id="@+id/itemSair"
+        android:title="@string/item_sair"
+        app:showAsAction="never"
+        android:orderInCategory="200"/>
+
+    <item android:id="@+id/itemPesquisa"
+        android:title="@string/item_add"
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_search"/>
+
+    <item android:id="@+id/itemAdd"
+        android:title="@string/item_add"
+        android:orderInCategory="400"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_person_add"/>
 </menu>
