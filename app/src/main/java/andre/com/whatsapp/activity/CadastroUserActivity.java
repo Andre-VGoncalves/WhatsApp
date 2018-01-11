@@ -1,8 +1,10 @@
 package andre.com.whatsapp.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
+import andre.com.whatsapp.helper.Base64Custom;
 import andre.com.whatsapp.model.User;
 
 public class CadastroUserActivity extends AppCompatActivity {
@@ -76,12 +79,16 @@ public class CadastroUserActivity extends AppCompatActivity {
                     Toast.makeText(CadastroUserActivity.this,"Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
                     Log.i("sucesso", "Cadastrado");
 
-                    FirebaseUser userFirebase = task.getResult().getUser();
-                    user.setId(userFirebase.getUid());
+                    //FirebaseUser userFirebase = task.getResult().getUser();
+
+                    String identificadorUser = Base64Custom.codificarBase64(user.getEmail());
+                    user.setId(identificadorUser);
                     user.salvar();
 
-                    autenticacao.signOut();
-                    finish();
+                    //autenticacao.signOut();
+                    //finish();
+
+                    abrirLoginUser();
 
                 }else{
                     String erro ="";
@@ -103,5 +110,11 @@ public class CadastroUserActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void abrirLoginUser() {
+        Intent intent = new Intent(CadastroUserActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
