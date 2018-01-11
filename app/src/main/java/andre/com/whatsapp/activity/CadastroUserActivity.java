@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
 import andre.com.whatsapp.helper.Base64Custom;
+import andre.com.whatsapp.helper.Preferencias;
 import andre.com.whatsapp.model.User;
 
 public class CadastroUserActivity extends AppCompatActivity {
@@ -84,6 +85,9 @@ public class CadastroUserActivity extends AppCompatActivity {
                     String identificadorUser = Base64Custom.codificarBase64(user.getEmail());
                     user.setId(identificadorUser);
                     user.salvar();
+
+                    Preferencias preferencias = new Preferencias(CadastroUserActivity.this);
+                    preferencias.salvarDados(identificadorUser);
 
                     //autenticacao.signOut();
                     //finish();

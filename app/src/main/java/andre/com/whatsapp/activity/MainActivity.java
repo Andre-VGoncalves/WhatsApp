@@ -14,14 +14,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import andre.com.whatsapp.Adapter.TabAdapter;
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
+import andre.com.whatsapp.helper.Base64Custom;
+import andre.com.whatsapp.helper.Preferencias;
 import andre.com.whatsapp.helper.SlidingTabLayout;
+import andre.com.whatsapp.model.Contato;
+import andre.com.whatsapp.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
+
+    private String identificadorContato;
+    private DatabaseReference referenceFireBase;
+
 
 
     @Override
@@ -88,14 +101,62 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setTitle("Novo Contato");
         alertDialog.setMessage("E-mail do Usuário");
         alertDialog.setCancelable(false);
-        EditText editText = new EditText(MainActivity.this);
-        alertDialog.setView(editText);
+        final EditText edtEmail = new EditText(MainActivity.this);
+        alertDialog.setView(edtEmail);
 
         //configurar Botões
         alertDialog.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
+                String emailContato =  edtEmail.getText().toString();
+                if (emailContato.equals("")){
+                    Toast.makeText(MainActivity.this, "Digite o E-mail do contato", Toast.LENGTH_SHORT).show();
+                }else{
+                    //verificar se o email existe
+                    identificadorContato = Base64Custom.codificarBase64(emailContato);
+
+                    //recuperar a instacia
+                    referenceFireBase = ConfigFirebase.getFirebase().child("usuarios").child(identificadorContato);
+
+                    referenceFireBase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.getValue() != null){
+
+                                //recuperar dados do contato
+                                User userContato = dataSnapshot.getValue(User.class);
+
+                                //Recuperar o usuario logdo da base64
+                                Preferencias preferencias = new Preferencias(MainActivity.this);
+                                String identificadoUser = preferencias.getIdentificador();
+
+                                Toast.makeText(MainActivity.this,identificadoUser , Toast.LENGTH_SHORT).show();
+
+
+                                referenceFireBase = ConfigFirebase.getFirebase().child("contatos")
+                                        .child(identificadoUser)
+                                        .child(identificadorContato);
+                                //referenceFireBase = referenceFireBase
+                                Contato contato = new Contato();
+                                contato.setIdentificadoUser(identificadorContato);
+                                contato.setEmail(userContato.getEmail());
+                                contato.setNome(userContato.getNome());
+
+                                referenceFireBase.setValue(contato);
+
+                            }else{
+                                Toast.makeText(MainActivity.this, "Esse E-mail não esta cadastrado", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
 

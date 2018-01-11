@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
+import andre.com.whatsapp.helper.Base64Custom;
+import andre.com.whatsapp.helper.Preferencias;
 import andre.com.whatsapp.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -82,6 +84,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 String erro ="";
                 if (task.isSuccessful()){
+
+                    Preferencias preferencias = new Preferencias(LoginActivity.this);
+                    String identificadorUser = Base64Custom.codificarBase64(user.getEmail());
+                    preferencias.salvarDados(identificadorUser);
                     Toast.makeText(LoginActivity.this,"Bem Vindo", Toast.LENGTH_SHORT).show();
                     abriTelaPrincipal();
                 }else{

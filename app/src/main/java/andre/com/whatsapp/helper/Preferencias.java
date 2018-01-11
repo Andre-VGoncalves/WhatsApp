@@ -11,9 +11,7 @@ public class Preferencias {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private String NOME_ARQUIVO = "whatsapp.preferencias";
-    private String CHAVE_NOME = "nome";
-    private String CHAVE_TELEFONE = "telefone";
-    private String CHAVE_TOKEN = "token";
+    private String CHAVE_IDENTIFICADOR = "identificadorUsuarioLogado";
     private int MODE = 0;
 
     public Preferencias(Context contexto) {
@@ -22,24 +20,16 @@ public class Preferencias {
         editor = preferences.edit();
     }
 
-    public void saveUserPreferencias(String nome, String telefone, String token){
-        editor.putString(CHAVE_NOME, nome);
-        editor.putString(CHAVE_TELEFONE, telefone);
-        editor.putString(CHAVE_TOKEN, token);
+    public void salvarDados(String identificadorUsuario){
+        editor.putString(CHAVE_IDENTIFICADOR, identificadorUsuario);
         editor.commit();
 
     }
 
-    public HashMap<String, String> getDadosUser (){
-
-        HashMap<String, String> dadosUser = new HashMap<>();
-
-        dadosUser.put(CHAVE_NOME, preferences.getString(CHAVE_NOME,null));
-        dadosUser.put(CHAVE_TELEFONE, preferences.getString(CHAVE_TELEFONE, null));
-        dadosUser.put(CHAVE_TOKEN, preferences.getString(CHAVE_TOKEN,null));
-
-        return dadosUser;
+    public  String getIdentificador (){
+        return preferences.getString(CHAVE_IDENTIFICADOR,null);
     }
+
 
 
 }
