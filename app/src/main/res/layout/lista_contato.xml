@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
-    android:textColor="@android:color/black"
-    android:textSize="16sp"
-    android:padding="8dp"/>
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/txtNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"/>
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="8dp"/>
+</LinearLayout>

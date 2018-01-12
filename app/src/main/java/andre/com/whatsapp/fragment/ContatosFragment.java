@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import andre.com.whatsapp.Adapter.ContatoAdapter;
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
 import andre.com.whatsapp.helper.Preferencias;
@@ -29,7 +30,7 @@ public class ContatosFragment extends Fragment {
 
     private ListView listView;
     private ArrayAdapter adapter;
-    private ArrayList<String> contatos;
+    private ArrayList<Contato> contatos;
     private DatabaseReference firebase;
     private ValueEventListener valueEventListenerContatos;
 
@@ -60,12 +61,13 @@ public class ContatosFragment extends Fragment {
         //montar a lista e o adapter
         listView = view.findViewById(R.id.lvContatos);
         contatos = new ArrayList<>();
-        adapter = new ArrayAdapter(
+        /*adapter = new ArrayAdapter(
                 getActivity(),
                 R.layout.lista_contato,
                 contatos
 
-        );
+        );*/
+        adapter = new ContatoAdapter(getActivity(),contatos);
         listView.setAdapter(adapter);
 
         //recuperar contatos
@@ -85,7 +87,7 @@ public class ContatosFragment extends Fragment {
                 //Listar contatos
                 for (DataSnapshot dados : dataSnapshot.getChildren()){
                     Contato contato = dados.getValue(Contato.class);
-                    contatos.add(contato.getNome());
+                    contatos.add(contato);
                 }
                 //avisar que tem novo contatos
                 adapter.notifyDataSetChanged();
