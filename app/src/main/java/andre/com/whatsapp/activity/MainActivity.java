@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                                 Preferencias preferencias = new Preferencias(MainActivity.this);
                                 String identificadoUser = preferencias.getIdentificador();
 
-                                Toast.makeText(MainActivity.this,identificadoUser , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Contato Adcionado com Sucesso" , Toast.LENGTH_SHORT).show();
 
 
                                 referenceFireBase = ConfigFirebase.getFirebase().child("contatos")
