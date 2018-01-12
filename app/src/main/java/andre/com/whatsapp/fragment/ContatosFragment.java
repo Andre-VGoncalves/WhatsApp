@@ -3,6 +3,7 @@ package andre.com.whatsapp.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,25 @@ public class ContatosFragment extends Fragment {
     private ArrayAdapter adapter;
     private ArrayList<String> contatos;
     private DatabaseReference firebase;
+    private ValueEventListener valueEventListenerContatos;
 
     public ContatosFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebase.addValueEventListener(valueEventListenerContatos);
+        Log.i("ValueEventListener", "OnStart");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        firebase.removeEventListener(valueEventListenerContatos);
+        Log.i("ValueEventListener", "OnStop");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +76,7 @@ public class ContatosFragment extends Fragment {
                     .child(identificadorUserLogado);
 
         //Listener para recuperar os contatos
-        firebase.addValueEventListener(new ValueEventListener() {
+        valueEventListenerContatos = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -80,7 +95,8 @@ public class ContatosFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+
 
         return view;
     }
