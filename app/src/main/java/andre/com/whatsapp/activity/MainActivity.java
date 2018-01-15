@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText edtEmail = new EditText(MainActivity.this);
         alertDialog.setView(edtEmail);
 
+
         //configurar Botões
         alertDialog.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
             @Override
