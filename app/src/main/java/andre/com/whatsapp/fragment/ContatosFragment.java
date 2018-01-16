@@ -76,6 +76,7 @@ public class ContatosFragment extends Fragment {
         //recuperar contatos
         Preferencias  preferencias = new Preferencias(getActivity());
         String identificadorUserLogado = preferencias.getIdentificador();
+
         firebase = ConfigFirebase.getFirebase()
                     .child("contatos")
                     .child(identificadorUserLogado);

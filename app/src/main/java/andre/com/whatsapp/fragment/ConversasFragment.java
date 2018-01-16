@@ -99,6 +99,4 @@ public class ConversasFragment extends Fragment {
 
         return view;
     }
-
-
 }
