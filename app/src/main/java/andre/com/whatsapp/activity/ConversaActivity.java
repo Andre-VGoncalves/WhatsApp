@@ -101,6 +101,7 @@ public class ConversaActivity extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String txtMensagem = edtMensagem.getText().toString();
 
                 if (txtMensagem.isEmpty()){
@@ -111,7 +112,11 @@ public class ConversaActivity extends AppCompatActivity {
                     mensagem.setIdUser(idUserRemetente);
                     mensagem.setMenssagem(txtMensagem);
 
+                    //remetente
                     salvarMensagem(idUserRemetente,idUserDest, mensagem);
+
+                    //destinatario
+                    salvarMensagem(idUserDest,idUserRemetente, mensagem);
 
                     edtMensagem.setText("");
 
