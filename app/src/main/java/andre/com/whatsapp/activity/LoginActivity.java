@@ -33,16 +33,16 @@ public class LoginActivity extends AppCompatActivity {
     private User user;
     private FirebaseAuth autenticacao;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_login);
 
-        verificaUserLogado();
+            verificaUserLogado();
 
-        edtEmail = findViewById(R.id.edtEmail);
-        edtSenha = findViewById(R.id.edtSenha);
-        btnEntrar = findViewById(R.id.btnEntrar);
+            edtEmail = findViewById(R.id.edtEmail);
+            edtSenha = findViewById(R.id.edtSenha);
+            btnEntrar = findViewById(R.id.btnEntrar);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
