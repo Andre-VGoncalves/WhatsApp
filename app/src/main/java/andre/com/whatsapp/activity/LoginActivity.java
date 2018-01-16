@@ -17,7 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.config.ConfigFirebase;
@@ -32,8 +35,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnEntrar;
     private User user;
     private FirebaseAuth autenticacao;
+    private String identificadorUser;
 
-        @Override
+    private ValueEventListener valueEventListenerUser;
+    private DatabaseReference firebase;
+
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
@@ -85,9 +93,32 @@ public class LoginActivity extends AppCompatActivity {
                 String erro ="";
                 if (task.isSuccessful()){
 
-                    Preferencias preferencias = new Preferencias(LoginActivity.this);
-                    String identificadorUser = Base64Custom.codificarBase64(user.getEmail());
-                    preferencias.salvarDados(identificadorUser);
+                    identificadorUser = Base64Custom.codificarBase64(user.getEmail());
+
+                    firebase= ConfigFirebase.getFirebase()
+                            .child("usuarios")
+                            .child(identificadorUser);
+
+                    valueEventListenerUser = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            User usuarioRecuperado = dataSnapshot.getValue(User.class);
+
+                            Preferencias preferencias = new Preferencias(LoginActivity.this);
+
+                            preferencias.salvarDados(identificadorUser,usuarioRecuperado.getNome());
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+
+                    firebase.addListenerForSingleValueEvent(valueEventListenerUser);
+
+
                     Toast.makeText(LoginActivity.this,"Bem Vindo", Toast.LENGTH_SHORT).show();
                     abriTelaPrincipal();
                 }else{
