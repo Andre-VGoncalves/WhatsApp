@@ -23,6 +23,7 @@ import andre.com.whatsapp.Adapter.ConversaAdapter;
 import andre.com.whatsapp.R;
 import andre.com.whatsapp.activity.ConversaActivity;
 import andre.com.whatsapp.config.ConfigFirebase;
+import andre.com.whatsapp.helper.Base64Custom;
 import andre.com.whatsapp.helper.Preferencias;
 import andre.com.whatsapp.model.Contato;
 import andre.com.whatsapp.model.Conversa;
@@ -96,6 +97,21 @@ public class ConversasFragment extends Fragment {
 
             }
         };
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ConversaActivity.class);
+
+                Conversa conversa = conversas.get(position);
+
+                //enviando dados para activity
+                intent.putExtra("nome", conversa.getNome());
+                String email = Base64Custom.decodificarBase64(conversa.getIdUsuario());
+                intent.putExtra("email", email);
+
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
